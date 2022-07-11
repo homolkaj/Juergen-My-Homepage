@@ -1,21 +1,35 @@
-# Homework 16.1: Use Jinja in your Homepage web app
-
 from flask import Flask, render_template
-import datetime
 
 app = Flask(__name__)
 
+# Using jinja and what we have learned so far, create three websites: "home", "about me" and "contact"
+# also create a base.html from which all of these website inherit their general format
+# Each website should have the same main heading <h1></h1>, same CSS file, but a different title <title></title>
+# and a different text <p></p>
+
 @app.route("/")
 def index():
-    boogle_title = "One account. All of Boogle."
-    boogle_text = "Sign in with your Boogle Account"
-    account_text = "Create an account"
-    current_year = datetime.datetime.now().year
-    current_date = datetime.datetime.today().strftime('%Y-%m-%d')
+    return render_template("index.html")
 
-    return render_template("index.html", boogle_title=boogle_title, boogle_text=boogle_text, account_text=account_text,
-                           current_year=current_year, current_date=current_date)
+@app.route("/about-me")
+def about():
+    return render_template("about.html")
 
+@app.route("/portfolio")
+def portfolio():
+    return render_template("portfolio.html")
+
+@app.route("/portfolio/fakebook")
+def portfolio_fakebook():
+    return render_template("Fakebook-Maxi_02.html")
+
+@app.route("/portfolio/boogle")
+def portfolio_boogle():
+    return render_template("Boogle_Login.html")
+
+@app.route("/portfolio/hair-salon")
+def portfolio_hairsalon():
+    return render_template("Hair-Salon.html")
 
 if __name__ == '__main__':
-    app.run(port=5001, use_reloader=True)
+    app.run(port=5005, use_reloader=True)
